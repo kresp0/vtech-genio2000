@@ -1,0 +1,69 @@
+diff -u a/include/arch/gl4000/system.h b/include/arch/gl4000/system.h
+--- a/include/arch/gl4000/system.h	2026-11-10 22:27:32.963999929 +0100
++++ b/include/arch/gl4000/system.h	2026-11-10 22:27:32.963999929 +0100
+@@ -24,7 +24,15 @@
+ #include <driver/hd44780.h>
+ 
+ // Keyboard
+-#ifdef KEYBOARD_MINIMAL
++#ifdef GENIO_ES
++	// Genio 2000 (Spanish): power-off, OFF key, Spanish keyboard and LCD glyphs (see genio.h, keyboard_es.h)
++	#include "genio.h"
++	#include "keyboard_es.h"
++	#ifdef GENIO_NATIVE_CGROM
++		// Native-CGROM profile: no CGRAM glyphs at boot, text through the verified CGROM profile (genio_native.h)
++		#include "genio_native.h"
++	#endif
++#elif defined(KEYBOARD_MINIMAL)
+ 	// Use minimal keyboard
+ 	#include "keyboardmin.h"
+ #else
+@@ -44,7 +52,13 @@
+ 
+ 
+ // Publish function NAMES for STDIO
+-#define VGLDK_STDOUT_PUTCHAR lcd_putchar
++#if defined(GENIO_ES) && defined(GENIO_NATIVE_CGROM)
++	#define VGLDK_STDOUT_PUTCHAR genio_native_putchar
++#elif defined(GENIO_ES)
++	#define VGLDK_STDOUT_PUTCHAR genio_putchar
++#else
++	#define VGLDK_STDOUT_PUTCHAR lcd_putchar
++#endif
+ #define VGLDK_STDIN_GETCHAR keyboard_getchar
+ 
+ //#define VGLDK_STDIN_GETS stdio_gets
+@@ -60,6 +74,11 @@
+ 	__endasm;
+ 	
+ 	lcd_init();
++	#if defined(GENIO_ES) && defined(GENIO_NATIVE_CGROM)
++	genio_native_init();	// state only: the native profile writes no CGRAM at boot
++	#elif defined(GENIO_ES)
++	genio_lcd_load_glyphs();
++	#endif
+ 	//lcd_scroll_cb = ...
+ 	keyboard_init();
+ 	sound_off();
+diff -u a/tools/Makefile.mk b/tools/Makefile.mk
+--- a/tools/Makefile.mk	2026-11-10 22:27:32.963999929 +0100
++++ b/tools/Makefile.mk	2026-11-10 22:27:32.963999929 +0100
+@@ -182,6 +182,9 @@
+ .SECONDARY: $(OUTPUT_FILE_HEX) $(OUTPUT_FILE_HEX_BIN)
+ 
+ 
++# Extra compiler flags, e.g. make cart VGLDK_SERIES=4000 VGLDK_CFLAGS=-DGENIO_ES
++VGLDK_CFLAGS ?=
++
+ # Commands
+ MKDIR_P = mkdir -p
+ CC = sdcc
+@@ -244,7 +247,7 @@
+ 	@# --out-fmt-s19
+ 	@# --out-fmt-ihx
+ 	$(CC) -mz80 --no-std-crt0 \
+-	-D VGLDK_SERIES=$(VGLDK_SERIES) \
++	-D VGLDK_SERIES=$(VGLDK_SERIES) $(VGLDK_CFLAGS) \
+ 	--code-loc $(LOC_CODE_MAIN) --data-loc $(LOC_DATA) \
+ 	--lib-path $(LIB_DIR) -I $(INC_DIR) -I $(ARCH_DIR) \
+ 	-o $@ \
