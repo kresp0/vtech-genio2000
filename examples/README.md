@@ -3,6 +3,7 @@
 | Directory | What it is | Verified |
 |---|---|---|
 | [`kepler-demo/`](kepler-demo/) | Music while animating the CGRAM, ROM text and the LED with loops of 256 T-states, a scroll with the names of the 4 x 20 family, and a finale that switches the unit off | builds with an unmodified VGLDK; runs to the end in MAME; tested on a real unit |
+| [`readysetgo/`](readysetgo/) | READY, SET, GO!: a BASIC-like prompt, giant letters, a key to launch the ships, pixel-smooth sprites and hyperspace, a scroll with the names of the 4 x 20 family, 1-bit music and the LED, all in one data-driven loop of 256 T-states; OFF plays a goodbye and switches off | builds with an unmodified VGLDK; runs to the end in MAME (snapshots compared dot by dot); **not tested on a real unit** |
 | [`text-editor/`](text-editor/) | A 4 x 20 text editor with the Spanish keyboard layer, a diagnostic and serial export | builds; its first 16 KiB are byte-identical to the original build; tested on a real unit |
 | [`vgldk-genio/`](vgldk-genio/) | The Genio 2000 layer for VGLDK (headers and a small patch) that the text editor needs | applies cleanly to VGLDK 6fbd389 |
 
