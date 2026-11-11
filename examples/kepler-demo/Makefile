@@ -12,5 +12,5 @@ cart:
 at28c256:
 	python3 -c "d=open('out/$(NAME).cart.$(CART_SIZE_KB)kb.bin','rb').read();open('$(NAME)_mirrored_AT28C256_32K.bin','wb').write(d*(32768//len(d)))"
 clean:
-	rm -rf out song.h scenes.h loop.h helpers.h *.bin
+	rm -rf out song.h scenes.h loop.h helpers.h finale.h names.h *.bin
 .PHONY: all gen cart at28c256 clean
