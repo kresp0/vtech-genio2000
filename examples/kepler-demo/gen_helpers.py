@@ -30,6 +30,9 @@ __asm
 	; LED (bit 5 of port 0x12) following the music: IXL = odd samples, IXH = even (brightness 0, medium, full)
 	.db 0xDD, 0x2E, 0
 	.db 0xDD, 0x26, 0
+	ld a, (_led_off)
+	or a, a
+	jr nz, fn_led
 	ld a, (_gen)
 	or a, a
 	jr z, fn_kick
