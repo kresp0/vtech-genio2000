@@ -1,0 +1,84 @@
+# "All tests": automatic ones, then every interactive one answered INTRO (yes), LCD dots repeated once with
+# REPETIR, LED answered N (no)
+wait 1.5
+press INTRO
+wait 0.4
+press 1
+until 1 I/O ports 60
+wait 1.0
+snap
+dump LCD dots
+until 2 INTRO=yes 10
+dump question
+expect 3 REPETIR=run again
+press REPETIR / BORRAR
+wait 1.0
+dump LCD dots again (REPETIR)
+expect 0 {00}{00}{00}*
+until 2 INTRO=yes 10
+press INTRO
+wait 0.6
+snap
+dump LCD checker
+wait 0.5
+snap
+until 2 INTRO=yes 10
+press INTRO
+wait 0.6
+snap
+dump LCD order
+until 2 INTRO=yes 10
+press INTRO
+wait 0.6
+snap
+dump caracteres 1
+press INTRO
+wait 0.6
+snap
+dump caracteres 2
+press INTRO
+wait 0.6
+snap
+dump caracteres 3
+press INTRO
+until 2 INTRO=yes 5
+press INTRO
+wait 0.8
+snap
+dump LCD CGRAM
+until 2 INTRO=yes 10
+press INTRO
+wait 1.0
+snap
+wait 2.4
+snap
+until 2 INTRO=yes 15
+press INTRO
+until 0 KEYBOARD 5
+press Q
+wait 0.3
+dump teclado Q
+press OFF
+wait 0.3
+dump teclado OFF (no apaga)
+press 1 JUGADOR
+wait 0.3
+dump teclado 1 JUGADOR
+press MAYUSCULAS (der.)+A
+wait 0.3
+dump teclado SHIFT+A
+hold RESPUESTA 1.8
+until 2 INTRO=yes 10
+dump pregunta sonido
+press INTRO
+until 2 INTRO=yes 10
+press N
+until 0 Done 10
+dump final
+results
+status LCD dots OK
+status LCD cursor OK
+status Keyboard INFO
+status Sound OK
+status LED FAIL
+quit

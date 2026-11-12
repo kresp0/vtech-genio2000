@@ -1,0 +1,67 @@
+# Navigation: a submenu and its "All", a single test, the result list, the burn-in loop, then OFF
+wait 1.5
+press INTRO
+wait 0.4
+press AVANCE
+press AVANCE
+press AVANCE
+wait 0.3
+dump cursor on CPU
+expect 2 >4 CPU >
+press INTRO
+wait 0.4
+dump submenu CPU
+expect 0 CPU
+press 1
+until 0 Done 20
+dump CPU group done
+expect 1 6 OK  0 FAIL
+press RESPUESTA
+wait 0.4
+expect 0 CPU
+press RESPUESTA
+wait 0.4
+press 5
+wait 0.4
+expect 0 RAM
+press 4
+until 3 INTRO: continue 20
+dump RAM march alone
+expect 1 OK
+press INTRO
+wait 0.3
+press RESPUESTA
+wait 0.4
+press 8
+wait 0.4
+expect 0 LCD SCREEN
+press RETROCESO
+wait 0.3
+dump last item of the LCD submenu
+expect 3 >7 LCD cursor
+press RESPUESTA
+wait 0.4
+# the main menu remembers "LCD screen" (index 7): four steps down is "Burn-in loop"
+press AVANCE
+press AVANCE
+press AVANCE
+press AVANCE
+wait 0.3
+dump cursor on Burn-in loop
+expect 2 >  Burn-in loop
+press INTRO
+until 0 LOOP pass 2 30
+dump burn-in after two passes
+hold ESPACIO 3
+until 0 RESULTS 20
+dump result list after the loop
+status RAM march 8K OK
+status IRQ period OK
+press RESPUESTA
+wait 0.4
+expect 0 DIAGNOSTICS
+dump before OFF
+hold OFF 0.2
+wait 1.0
+peek _scr 20
+quit

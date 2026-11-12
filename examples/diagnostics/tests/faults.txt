@@ -1,0 +1,11 @@
+# Automatic tests with injected faults: a RAM bit stuck at 0 (DG_STUCK0), a key held during "Keys at rest",
+# and (with a patched image) a corrupted cartridge byte
+wait 1.5
+press INTRO
+wait 0.4
+press 2
+until 0 Keys at rest 60
+hold Q 5
+until 0 Done 60
+results
+quit

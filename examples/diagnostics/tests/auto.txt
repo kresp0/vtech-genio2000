@@ -1,0 +1,44 @@
+# Automatic tests from the main menu, then the result list
+wait 1.5
+fields
+dump boot
+expect 0 DIAGNOSTICS
+press INTRO
+wait 0.4
+dump main menu
+expect 1 >1 All tests
+press 2
+until 0 Done 60
+dump summary
+results
+status CPU registers OK
+status CPU ALU OK
+status CPU jumps OK
+status CPU block ops OK
+status CPU indexed OK
+status CPU R and I OK
+status RAM data bus OK
+status RAM address OK
+status RAM march 8K OK
+status RAM mirror INFO
+status RAM at boot INFO
+status ROM cartridge OK
+status ROM page 81 OK
+status ROM internal OK
+status ROM window 1 INFO
+status Keys at rest OK
+status Interrupt OK
+status IRQ period OK
+status I/O ports INFO
+press INTRO
+wait 0.4
+dump result list
+press INTRO
+wait 0.4
+dump detail of the first test
+press INTRO
+wait 0.3
+press RESPUESTA
+wait 0.3
+expect 0 DIAGNOSTICS
+quit

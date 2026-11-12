@@ -1,0 +1,17 @@
+# Sistema > IRQ period, then Sistema > Interrupt
+wait 1.5
+press INTRO
+wait 0.4
+press 7
+wait 0.4
+press 4
+until 0 IRQ period 10
+wait 0.3
+dump periodo
+press INTRO
+wait 0.3
+press 3
+until 0 Interrupt 10
+wait 0.3
+dump interrupcion
+quit

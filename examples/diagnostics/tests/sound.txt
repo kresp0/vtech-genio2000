@@ -1,0 +1,9 @@
+# Sonido from the main menu (key 0); the WAV is recorded with -wavwrite
+wait 1.5
+press INTRO
+wait 0.4
+press 0
+until 2 INTRO=yes 10
+press INTRO
+wait 0.3
+quit
