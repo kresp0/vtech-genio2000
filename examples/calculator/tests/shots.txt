@@ -1,0 +1,72 @@
+# Snapshots for the README: boot, a result, help, a panel-key help page, statistics, catalog, constants, glyphs
+wait 1.5
+snap
+press 2
+press MAYUSCULAS (der.)+SINONIMOS
+press 8
+press SUMA
+press 1
+press DIVISION
+press 3
+press ANTONIMOS
+press INTRO
+wait 0.5
+snap
+press AYUDA
+wait 0.3
+snap
+press BUSCA LA LETRA
+wait 0.3
+snap
+press INTRO
+press 1
+press ,
+press 2
+press HISTORIA Y GEOGRAFIA
+press 4
+press ,
+press 3
+press HISTORIA Y GEOGRAFIA
+press MAYUSCULAS (der.)+HISTORIA Y GEOGRAFIA
+wait 1
+snap
+press AVANCE
+press AVANCE
+press AVANCE
+press AVANCE
+press AVANCE
+press AVANCE
+wait 0.3
+snap
+press RESPUESTA
+press GENERAL
+wait 0.3
+snap
+press RESPUESTA
+press CIENCIAS
+press AVANCE
+wait 0.3
+snap
+press RESPUESTA
+press MAYUSCULAS (der.)+BUSCA LA LETRA
+press IMPRIMIR TEXTO
+press MAYUSCULAS (der.)+IMPRIMIR TEXTO
+press MAYUSCULAS (der.)+ALGEBRA
+press MAYUSCULAS (der.)+LA NUEVA PALABRA
+press MAYUSCULAS (der.)+ALFAPUZZLE
+press ACERTIJO GRAMATICAL
+press ANTONIMOS
+press REVOLTIJO
+wait 0.3
+snap
+press REPETIR / BORRAR
+press 1
+press 2
+press DIVISION
+press 7
+press INTRO
+wait 0.3
+press FRACCIONES / DECIMALES
+wait 0.5
+snap
+quit

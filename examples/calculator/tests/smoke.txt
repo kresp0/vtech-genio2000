@@ -1,0 +1,16 @@
+wait 1.5
+dump boot
+snap
+eval 1+2
+dump
+eval 2{x}3+4{x}5
+eval sin(30)
+eval 1{/}3
+eval {sqrt}2
+eval 10!
+eval ln(2)
+eval solve(X{2}-2,1)
+eval {int}(X{2},0,3)
+dump after
+snap
+quit

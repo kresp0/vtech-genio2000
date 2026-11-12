@@ -1,0 +1,23 @@
+# BORRAR stops a long calculation; OFF works during one
+wait 1.5
+setbuf {int}({int}(X{x}1,0,1),0,2)
+press INTRO
+wait 1.5
+expect 3 Working...
+press REPETIR / BORRAR
+wait 0.5
+expect 3 Break
+# the line stays for editing; BORRAR clears it
+press REPETIR / BORRAR
+press 1
+press SUMA
+press 1
+press INTRO
+wait 0.3
+expect 3                    2
+setbuf {int}(sin(X),0,9999)
+press INTRO
+wait 1
+hold OFF 0.2
+wait 1
+quit

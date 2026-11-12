@@ -1,0 +1,7 @@
+out/
+mame/
+__pycache__/
+consts.h
+tables.h
+tests/page2.h
+tests/host

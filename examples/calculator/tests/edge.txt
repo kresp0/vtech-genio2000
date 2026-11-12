@@ -1,0 +1,22 @@
+# Edge cases: deep nesting, nested calculus, limits (results are logged, compare by eye)
+wait 1.5
+eval ((((((((((2))))))))))+1
+eval ((((((((((((((((((((((((((((((((((((((((1))))))))))))))))))))))))))))))))))))))))
+eval 1+1
+eval sin(sin(sin(sin(sin(sin(sin(sin(sin(sin(sin(sin(1))))))))))))
+eval {int}({int}(X{x}1,0,1),0,2)
+eval d/dx(solve(X{2}-A,1),4)
+eval {sum}({sum}(1,1,X),1,10)
+eval 2^0.5^2
+eval 1{E}499{x}9.99
+eval -2^0.5
+eval 5{sto}B
+eval B!
+eval rand
+eval ranint(1,6)
+eval gamma(0.5)
+eval 0.1{x}3-0.3
+eval 4{x}atan(1)
+eval e^({pi}{x}163^0.5)
+dump
+quit

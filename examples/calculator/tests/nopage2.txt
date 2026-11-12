@@ -1,0 +1,7 @@
+# An image whose second half is blank: the program must say so and still switch off with OFF
+wait 1.5
+expect 0 Page 2 (0x83) of the
+expect 1 cartridge is missing
+hold OFF 0.2
+wait 0.5
+quit
