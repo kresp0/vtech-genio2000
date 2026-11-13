@@ -25,13 +25,13 @@ The photographic layout (later in the series, [`docs/mame/ARTWORK.md`](docs/mame
 ![MAME with the photographic layout, at the EBASIC start screen](docs/mame/layout_ebasic.jpg)
 
 ## Character set (CGROM)
-The LCD controller has its own character table, with Spanish letters, accents, mathematical symbols and Greek letters. It was rebuilt from photographs of the real LCD showing every code from 0x20 to 0xFF, three screens at a time:
+The LCD controller has its own character table, with Spanish letters, accents, mathematical symbols and Greek letters. It was rebuilt from photographs of the real LCD showing every code from 0x20 to 0xFF, three screens at a time. The same screens in MAME:
 
-![Codes 0x20-0x6F](cgrom/photo_page1.jpg)
-![Codes 0x70-0xBF](cgrom/photo_page2.jpg)
-![Codes 0xC0-0xFF](cgrom/photo_page3.jpg)
+![Codes 0x20-0x6F](cgrom/mame_page1.png)
+![Codes 0x70-0xBF](cgrom/mame_page2.png)
+![Codes 0xC0-0xFF](cgrom/mame_page3.png)
 
-The result, [`cgrom/genio2000_cgrom_reconstructed.bin`](cgrom/genio2000_cgrom_reconstructed.bin) (4096 bytes, MAME `hd44780` format, SHA-1 `0ad6de16db67c014f44211dfd1328091be389cc7`), is what MAME's `genio2000` driver loads. It is not a read of the chip, so MAME marks it `BAD_DUMP`. How it was made, its limits and MAME's rendering of the same screens: [`cgrom/README.md`](cgrom/README.md) and [`docs/hardware/CGROM.md`](docs/hardware/CGROM.md).
+The result, [`cgrom/genio2000_cgrom_reconstructed.bin`](cgrom/genio2000_cgrom_reconstructed.bin) (4096 bytes, MAME `hd44780` format, SHA-1 `0ad6de16db67c014f44211dfd1328091be389cc7`), is what MAME's `genio2000` driver loads. It is not a read of the chip, so MAME marks it `BAD_DUMP`. How it was made, its limits and the photographs: [`cgrom/README.md`](cgrom/README.md) and [`docs/hardware/CGROM.md`](docs/hardware/CGROM.md).
 
 ## Repository layout
 * [`docs/`](docs/README.md): hardware notes, firmware analysis, MAME notes.

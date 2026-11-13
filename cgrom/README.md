@@ -2,17 +2,17 @@
 
 The LCD controller of the Genio 2000 has its own built-in character table: not the HD44780 A00 table of the German Genius Leader 4000, but one with Spanish letters, accents, mathematical symbols and Greek letters. `genio2000_cgrom_reconstructed.bin` is that table, rebuilt from photographs of the real LCD. It is what MAME's `genio2000` driver loads.
 
-Photographs of the real unit showing codes 0x20-0xFF (three screens of 80, 80 and 64 characters):
-
-![Codes 0x20-0x6F on the real unit](photo_page1.jpg)
-![Codes 0x70-0xBF on the real unit](photo_page2.jpg)
-![Codes 0xC0-0xFF on the real unit](photo_page3.jpg)
-
-The same three screens drawn by MAME from the binary (the diagnostic cartridge's character test, [`../examples/diagnostics/`](../examples/diagnostics/)):
+Codes 0x20-0xFF (three screens of 80, 80 and 64 characters) drawn by MAME from the binary, with the diagnostic cartridge's character test ([`../examples/diagnostics/`](../examples/diagnostics/)):
 
 ![Codes 0x20-0x6F in MAME](mame_page1.png)
 ![Codes 0x70-0xBF in MAME](mame_page2.png)
 ![Codes 0xC0-0xFF in MAME](mame_page3.png)
+
+The photographs of the real unit it was rebuilt from (perspective corrected; click to enlarge):
+
+<a href="photo_page1.jpg"><img src="photo_page1.jpg" width="32%" alt="Codes 0x20-0x6F on the real unit"></a>
+<a href="photo_page2.jpg"><img src="photo_page2.jpg" width="32%" alt="Codes 0x70-0xBF on the real unit"></a>
+<a href="photo_page3.jpg"><img src="photo_page3.jpg" width="32%" alt="Codes 0xC0-0xFF on the real unit"></a>
 
 ## The file
 | | |
