@@ -15,7 +15,7 @@ Evidence classes as in `HARDWARE.md` (HW / EMU / FW / HYP / UNK).
 
 ## Not modelled in the PR series (PRs 1-8)
 * Ports 0x06 (written 0x40 at reset) and 0x02/0x04/0x05 (written 0 at reset): function UNKNOWN, left unmapped on purpose. Port 0x00 behaviour (stubs in bank 7), cartridge bank decoding beyond the 2-page cartridges, bits 5-7 of the port 0x01 selector.
-* Printer (DB25: data 0x10, busy 0x11 bit 5, strobe 0x12 bit 2). MAME maps port 0x11 writes onto the keyboard latch (inherited, probably inexact).
+* Printer (DB25: data 0x10, busy 0x11 bit 5, strobe 0x12 bit 2). Programs that use it as a serial link can be tested with the Lua bridge of `examples/pc-link` (`PRINTER_PORT.md`), which is a test aid, not a device model. MAME maps port 0x11 writes onto the keyboard latch (inherited, probably inexact).
 * The speaker's own frequency response; the LCD's contrast model (the switch only scales the palette by amounts from one pair of photographs); the exact dot colours (by eye).
 * Natural keyboard / typing from the PC layout; only matrix keys are emulated.
 * OFF/ON: the unit is switched off only in the sense that the CPU halts and the LCD goes blank; ON is emulated in place (RAM cleared although the unit does not zero it, most words read `70 C1 07 1C`; latches and LCD controller reset, RESET pulsed), not as a hard reset of the machine. Whether ON is a CPU reset line or the power-up of the whole board is unknown.

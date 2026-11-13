@@ -9,13 +9,13 @@ How to write, build, test and burn a cartridge program for the Spanish VTech Gen
 | Toolchain | [SDCC](https://sdcc.sourceforge.net/) 4.5 (`sdcc`, `sdasz80`, `makebin`), Python 3 |
 | C library layer | [VGLDK](https://github.com/hotkeymuc/vgldk) commit `6fbd389ace4c7bf156cb2c3fafafb1acf4a2a857` (GPL-3.0, not included), plus [`examples/vgldk-genio`](../examples/vgldk-genio/README.md) for the Spanish keyboard and the native character set |
 | Emulator | MAME with the `genio2000` driver (section 4) and **your own** ROM dump: the firmware and the reconstructed character table are not in this repository |
-| Hardware (optional) | a Genio 2000, an AT28C256 EEPROM in a modified cartridge, a programmer, a USB-serial adapter for output. The cartridge modification is described in [vtech-genio2000-rom-dumper](https://github.com/kresp0/vtech-genio2000-rom-dumper) |
+| Hardware (optional) | a Genio 2000, an AT28C256 EEPROM in a modified cartridge, a programmer, a USB-serial adapter for output and input. The cartridge modification is described in [vtech-genio2000-rom-dumper](https://github.com/kresp0/vtech-genio2000-rom-dumper) |
 
 ## 2. The machine in one page
 
 * **CPU** Z84C0006 (Z80), about 6.13 MHz (measured; `docs/hardware/CLOCK_AND_SOUND.md`). Interrupt mode 1 at **46.76 Hz**.
 * **Memory map**: `0000-3FFF` ROM bank 0 (fixed), `4000-7FFF` ROM window 1 (port 0x01), `8000-BFFF` window 2: internal ROM or **cartridge** (port 0x03), `C000-DFFF` **8 KiB RAM** (also seen at `E000-FFFF`). See `docs/hardware/MEMORY_MAP.md`.
-* **Ports**: `0x01`/`0x03` bank select, `0x0A`/`0x0B` LCD command/data, `0x10`/`0x11` keyboard (also printer lines), `0x12` system: **bit 0 = power off**, bit 2 printer strobe, bit 3 speaker, bit 5 caps-lock LED. See `docs/firmware/IO_REGISTERS.md`.
+* **Ports**: `0x01`/`0x03` bank select, `0x0A`/`0x0B` LCD command/data, `0x10`/`0x11` keyboard (also printer lines: DATA0 = `0x10` bit 0 out, BUSY = `0x11` bit 5 in, both inverted; `docs/hardware/PRINTER_PORT.md`), `0x12` system: **bit 0 = power off**, bit 2 printer strobe, bit 3 speaker, bit 5 caps-lock LED. See `docs/firmware/IO_REGISTERS.md`.
 * **LCD**: HD44780, 4 x 20 characters, with the physical character set documented in `docs/hardware/CGROM.md` and 8 user glyphs (CGRAM). The firmware's interrupt routine normally refreshes the LCD from a RAM buffer and scans the keyboard (`docs/firmware/LCD_INTERNALS.md`, `KEYBOARD_INTERNALS.md`).
 * **Sound**: no sound chip; one bit (port 0x12 bit 3) toggled by software.
 
@@ -69,7 +69,7 @@ MAME models the clock (6.13179 MHz), the 46.76 Hz interrupt, the Spanish keyboar
 What MAME does **not** reproduce: the LCD's persistence and contrast, the real RAM power-up state (it is zeroed; the unit's is not), `IN 0x11` bit 6, and anything electrical. Treat emulation as necessary, not sufficient.
 
 ### Test on the unit
-Output you can capture without a debugger: serial over the printer port (DATA0 -> a USB-serial RXD, 9600 8N1; `examples/text-editor/src` has the transmitter and `tools/hwtest` a complete example with a receiver). Burning and swapping EEPROMs is yours to do; nothing in this repository writes to a chip.
+Output you can capture without a debugger: serial over the printer port (DATA0 -> a USB-serial RXD, 9600 8N1 or faster; `examples/text-editor/src` has the transmitter and `tools/hwtest` a complete example with a receiver). Input from a PC goes the other way on the same cable: the adapter's TXD on BUSY (DB25 pin 11); `examples/pc-link` is a complete example (receiver routines with counted T-states, a packet protocol, a PC script, and a Lua bridge that tests it in MAME, which has no printer port). Burning and swapping EEPROMs is yours to do; nothing in this repository writes to a chip.
 
 ## 5. Capabilities and limits
 
@@ -81,7 +81,7 @@ Output you can capture without a debugger: serial over the printer port (DATA0 -
 | LCD timing | the firmware does not read the busy flag; leave at least about 40 us between writes |
 | Sound | 1 bit. Pitch and tempo come from CPU timing, so with interrupts enabled the 46.76 Hz ISR steals cycles from a tone loop; the examples disable interrupts while playing |
 | Keyboard | 8 x 13 matrix, no diodes: ghosting is possible. Only one key per scan is decoded by the firmware. Layout and legends: `docs/hardware/KEYBOARD.md` |
-| Printer port | the unit can transmit (a software UART on DATA0 works at 9600 8N1); receiving is **untested** |
+| Printer port | a two-way serial link to a PC: transmit on DATA0, receive on BUSY, every packet good at 2400-76800 baud on the unit, 115200 and 128000 experimental (`examples/pc-link`, `docs/hardware/PRINTER_PORT.md`). No interrupt is tied to BUSY: the program must be polling when a byte arrives. Selecting keyboard column 0 drives DATA0 low |
 | OFF key | not handled by the hardware or the cartridge ROM: your program must poll it (see section 3) |
 | Interrupts | the firmware starts a cartridge with interrupts disabled. Enable them only if you want the firmware's keyboard/LCD service |
 | Unknown | ports 0x02, 0x04-0x06 (written 0 at reset), the NMI, `/WR` to the cartridge (so RAM in the cartridge), the real capacity of the ROM |

@@ -30,5 +30,5 @@
 | E4 | Pages 2-7 of a cartridge (128 KiB ROM with a mark per page) | confirm 3 page bits and maximum capacity. **Partial**: with 32 KiB only bit 1 moves A14; a larger ROM is missing |
 | E5 | Self-starting cartridge without `CALL 05CF` | confirm that the LCD stays uninitialised on HW as in EMU |
 | E6 | CPU and IRQ frequency (T7) | **DONE (HW 2026-11-10)**: CPU about 6.10-6.13 MHz, IRQ 46.76 Hz |
-| E7 | RX through the printer port (read 0x10/0x11) | ESP32 path through the parallel port (architecture E) |
+| E7 | RX through the printer port (read 0x10/0x11) | **DONE (HW 2026-11-13)**: BUSY (0x11 bit 5, inverted) receives a soft UART from a USB-serial adapter at 2400-76800 baud reliably and 115200-128000 with a recording receiver (`examples/pc-link`, `docs/hardware/PRINTER_PORT.md`). Open: the electrical side of BUSY and the other status lines |
 | E8 | Press key combinations at start-up ("service mode" style) after the Q8/Q9 analysis | hidden functions |

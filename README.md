@@ -12,6 +12,7 @@ Documentation, measurements and tools for the Spanish **VTech Genio 2000**, a 19
 | Memory | 128 KiB firmware ROM in 8 distinct banks of 16 KiB (window switching through ports 01/03), 8 KiB RAM at C000-DFFF (mirrored at E000) |
 | Display | HD44780-type controller, 4 x 20 characters, own character set |
 | Cartridges | 36-contact connector; autostart (`55 AA 59 45`) and menu (`55 AA 47 41` / `55 AA 11`) signatures |
+| Printer port | a two-way serial link to a PC from a cartridge (transmit on DATA0, receive on BUSY), 2400-76800 baud, measured on the unit ([`docs/hardware/PRINTER_PORT.md`](docs/hardware/PRINTER_PORT.md)) |
 | Firmware | two revisions known (two units): banks 0, 4, 5, 6 identical; 1, 2, 3, 7 differ |
 
 Details, evidence levels and open questions are in [`docs/`](docs/README.md).
@@ -22,7 +23,7 @@ The driver is submitted to MAME as a series of small pull requests. The first on
 ## Repository layout
 * [`docs/`](docs/README.md): hardware notes, firmware analysis, MAME notes.
 * [`tools/`](tools/README.md): hardware test cartridge, analysis tools, MAME helpers. The ROM dumper is in its own repository, [vtech-genio2000-rom-dumper](https://github.com/kresp0/vtech-genio2000-rom-dumper).
-* [`examples/`](examples/README.md): cartridge programs (a text editor and the Kepler music/animation demo) and the VGLDK layer they build on.
+* [`examples/`](examples/README.md): cartridge programs (a text editor, a PC serial link, a diagnostic cartridge, a scientific calculator, demos) and the VGLDK layer they build on.
 * [`docs/DEVELOPING.md`](docs/DEVELOPING.md): how to write, build, test and burn your own cartridge.
 * [`photos/`](photos/README.md): the unit, its board and a memory cartridge.
 * [`release/`](release/RELEASE_NOTES.md): ready-to-burn cartridge images (examples and the hardware test) with SHA-256 sums.

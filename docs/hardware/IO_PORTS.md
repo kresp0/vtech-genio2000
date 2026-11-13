@@ -13,9 +13,9 @@ activities, BASIC, OFF) and `tests/lua/io_inventory.lua`; the numbers are specif
 | 0x06 | W | `0x40` written once at reset (PC 0x0FE9, bank 0). No read in any emulated scenario (the static analysis lists `IN`s: unreached in EMU). **Function UNKNOWN**; not modelled (MAME reports unmapped writes) | FW + EMU / UNK | survey |
 | 0x0A | R/W | HD44780 instruction register | EMU (works), HYP (same chip family as gl4000) | boots, text & CGRAM exact |
 | 0x0B | R/W | HD44780 data register | idem | LCD data log: the welcome string sends `A9` before `Hola!` |
-| 0x10 | W | keyboard column select (bit n = column n), also printer data D0-D7 | HW (keyboard), FW | `KEYBOARD.md` |
+| 0x10 | W | keyboard column select (bit n = column n), also printer data D0-D7; bit 0 drives DB25 pin 2 (DATA0) **inverted** (1 = pin low), so selecting column 0 disturbs a serial link on DATA0 | HW (keyboard, serial link) | `KEYBOARD.md`, `PRINTER_PORT.md` |
 | 0x10 | R | keyboard rows, matrix 1 (active low in MAME) | HW (positions), EMU | |
-| 0x11 | R | keyboard rows, matrix 2 (activity panel); printer BUSY (bit 5) | FW | VGLDK `printer.h`; the firmware polls it |
+| 0x11 | R | keyboard rows, matrix 2 (activity panel); printer BUSY = bit 5, **inverted** (1 while DB25 pin 11 is low), usable as a serial input up to 76800 baud by polling and 128000 by recording; bit 6 reads 1 on the unit (function unknown) | HW (BUSY), FW | `PRINTER_PORT.md`; VGLDK `printer.h`; the firmware polls it |
 | 0x11 | W | MAME maps this to the **same** latch as 0x10. The firmware writes 0x11 once at boot (`OUT 11,FF` per VGLDK/BIOS4000 01a6). Real function (latch / printer) UNK | UNK | |
 | 0x12 | R/W | bit 0 = power-off request, bit 2 = printer STROBE, bit 3 = speaker, bit 5 = caps LED (the LED follows caps-lock on the real unit: HW photos; bit 5 as its driver is FW); the firmware reads it back (read-modify-write) | FW (all), HW (power-off, strobe via dump protocol) | `genio_text_editor/docs/LED_Y_APAGADO.md`; reset value `0xDE` (PC 0x0FB5) |
 | 0x13-0xFF | – | no access seen | | |
