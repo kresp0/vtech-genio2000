@@ -71,6 +71,13 @@ What MAME does **not** reproduce: the LCD's persistence and contrast, the real R
 ### Test on the unit
 Output you can capture without a debugger: serial over the printer port (DATA0 -> a USB-serial RXD, 9600 8N1 or faster; `examples/text-editor/src` has the transmitter and `tools/hwtest` a complete example with a receiver). Input from a PC goes the other way on the same cable: the adapter's TXD on BUSY (DB25 pin 11); `examples/pc-link` is a complete example (receiver routines with counted T-states, a packet protocol, a PC script, and a Lua bridge that tests it in MAME, which has no printer port). Burning and swapping EEPROMs is yours to do; nothing in this repository writes to a chip.
 
+### Screenshots for the README
+Every program shows what it looks like, from MAME, in the same style (the `examples/` and the related repositories EASM, EBASIC, 4Forth and the ROM dumper follow it):
+* `screens_mame.png` next to the README, linked as `![MAME snapshots](screens_mame.png)` right after the first paragraph or list, with a one-line caption in italics that says what each snapshot is: native LCD snapshots (`-snapview native`, 120 x 40) enlarged 4x with nearest-neighbour to 480 x 160, two per row, 10 px of white between them (a sheet 980 px wide, 170 px per row). Four to eight snapshots: the start screen, the main use, a result, and **the help screen if the program has one**.
+* For `examples/`, also `screen.png`: one representative snapshot enlarged 3x (360 x 120), for the table in `examples/README.md`.
+* Made by a script, never by hand: a snapshot script (key presses, waits, `snap`) driven by the program's Lua driver or a small one, and `tests/sheet.sh` (or `tests/sheet.py`) that runs MAME headless and builds the sheet, so the picture can be made again when the program changes. Clear the snapshot directory first: MAME keeps numbering in an existing one.
+* The snapshots must not show anything read from the firmware.
+
 ## 5. Capabilities and limits
 
 | | |
@@ -91,7 +98,7 @@ Banks 1, 2, 3 and 7 differ between the two units dumped. Cartridge programs do n
 
 ## 7. Checklist for a new program
 1. Start from `examples/text-editor`; build with the VGLDK layer.
-2. Run it in MAME headless and check a snapshot of the LCD.
+2. Run it in MAME headless, check snapshots of the LCD, and make the README's screenshots with a script (section 4, "Screenshots for the README"), including the help screen if there is one.
 3. Review the rules of section 3 against your code (no `HALT`, no write of bit 0 of port 0x12, no unknown ports).
 4. Prepare a mirrored 32 KiB image and its SHA-256; burn it; first run with output on the serial port.
 5. Record what you saw on the unit, and mark in your own notes what was only emulated.
