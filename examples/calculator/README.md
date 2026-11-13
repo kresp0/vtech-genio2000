@@ -68,9 +68,10 @@ Page 1 uses 16 279 of its 16 384 bytes (105 free; `python3 sizes.py` lists the f
 * `tests/edge.txt` (results logged), `tests/shots.txt` + `tests/sheet.py` (the picture above).
 
 ## Status
-* **Verified in MAME only** (headless, the `genio` build of mame-upstream): every test above passes; port 0x12 is written only with bits 3 (speaker) and 5 (LED) except the single power-off write; port 0x03 only with 0x80 and 0x83 (the firmware writes 0x00 before the cartridge starts); there is one HALT, in the power-off sequence. Timing in MAME: `+ - x /` instant, sin/ln/e^x 0.1-0.5 s, `253!` 4 s, an integral of sin in degrees 11 s, a nested integral 26 s.
-* **Not tried on the unit.** Risks, most likely first:
-  * **The second page.** Page 2 is selected with bit 1 of port 0x03 (A14 of the EEPROM on the RevD board, measured on the unit, [`HW_RESULTS_20261110.md`](../../docs/firmware/HW_RESULTS_20261110.md) #3), but no code has read the second half on the real unit yet ([EBASIC](https://github.com/kresp0/ebasic) uses the same scheme, also untested). If it fails, the program finds no signature at the start of page 2 and says "Page 2 (0x83) of the cartridge is missing" instead of starting (OFF still works).
+* **Tested on a real unit** by the author: it works, including the second page (selector 0x83).
+* **Verified in MAME** (headless, the `genio` build of mame-upstream): every test above passes; port 0x12 is written only with bits 3 (speaker) and 5 (LED) except the single power-off write; port 0x03 only with 0x80 and 0x83 (the firmware writes 0x00 before the cartridge starts); there is one HALT, in the power-off sequence. Timing in MAME: `+ - x /` instant, sin/ln/e^x 0.1-0.5 s, `253!` 4 s, an integral of sin in degrees 11 s, a nested integral 26 s.
+* Assumptions that MAME cannot check (they held on the tested unit):
+  * **The second page.** Page 2 is selected with bit 1 of port 0x03 (A14 of the EEPROM on the RevD board, measured on the unit, [`HW_RESULTS_20261110.md`](../../docs/firmware/HW_RESULTS_20261110.md) #3); this calculator is the first program that read the second half on the real unit. If it fails on another unit or board, the program finds no signature at the start of page 2 and says "Page 2 (0x83) of the cartridge is missing" instead of starting (OFF still works).
   * The firmware is assumed to start the cartridge with bit 1 of the selector at 0 (page 1); MAME agrees.
   * LCD timing: 56 us between writes without reading the busy flag; init with 5 ms between commands. MAME does not check either.
   * The keyboard is read without the firmware: MAYUSCULAS/ALT combinations were measured on the unit only as single keys (`KEYBOARD.md`); ghosting with three keys is possible.

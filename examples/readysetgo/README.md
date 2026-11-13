@@ -44,16 +44,18 @@ Needs `sdcc` 4.5, `makebin`, `python3` and an **unmodified** VGLDK at commit 6fb
 * Example: `MAME=... ROMPATH=... mame/run_test.sh runA 80 "15:press:ESPACIO;20:snap;30:snap;31:quit" -snapview native && GENIO_CGROM=... python3 mame/check_run.py runA basic,ready,set,prompt,go,launch,warp`. Add `-sound sdl -wavwrite out.wav` (with the SDL dummy audio driver the script sets) to record the audio.
 
 ## Status
-Verified **in MAME only** (genio2000 driver, 6.13179 MHz, the release image above):
+**Tested on a real unit** by the author: it works.
+
+Verified **in MAME** (genio2000 driver, 6.13179 MHz, the release image above):
 * The whole show runs: 27 of 27 snapshots (BASIC, READY, SET, prompt, GO, launch with and without the marquee, warp, credits, end) equal, dot for dot, the screens predicted from the streams. The marquee runs through all the names and ends blank before the credits.
 * LCD writes: the shortest gap is 252 T-states (41.1 us); port 0x12: the samples are 128 T apart except right after a note change; **bit 0 of port 0x12 is never written** until the power-off, and no other unknown bit is written; the only ports written are 0x0A, 0x0B, 0x10 and 0x12; the only `HALT` is the one of the power-off sequence.
 * Pitch: the prompt's A5 measures 879.8 Hz and SET's E2 82.6 Hz in a WAV recorded with `-wavwrite`.
 * SPACE at the prompt ends it within 16 ms; with no key it launches by itself after 4 loops. A 0.1 s tap of OFF during the warp and a 1.5 s hold give the same result: the segment ends 42 ms after the press, the whole goodbye plays (0.99 s) and `OUT (0x12),1` follows.
 
-**Not tested on a real unit.** Risks, in the order I would look at them:
+Things MAME cannot check (they were fine on the tested unit; worth looking at on other units or machines):
 * **LCD timing.** One write every 41.1-41.7 us and the whole CGRAM rewritten 352 times per second. The tested Kepler demo does the same at 41.7 us, but this demo is 4 T-states tighter on some writes, and the controller is an unproven HD44780 clone. A failure would show as wrong glyphs or misplaced characters.
 * **LCD persistence.** MAME shows each frame sharply; the real STN panel smears. The warp texture and the fast strobes (GO!, READY inverted) may look grey or blurred, and the dot of the prompt may leave a trail.
-* **Keyboard scan.** It writes one column mask to port 0x10, reads the rows about 128 T later, and returns to 0, as the text editor does but slower; OFF is read like the firmware routine but with a longer settling time. Untested on the unit. A key held when the prompt starts counts at once.
+* **Keyboard scan.** It writes one column mask to port 0x10, reads the rows about 128 T later, and returns to 0, as the text editor does but slower; OFF is read like the firmware routine but with a longer settling time. A key held when the prompt starts counts at once.
 * **OFF press.** 42 ms of debounce instead of the 1.4 s hold of the text editor and the firmware routine: a brush against the key switches the demo off. Contact bounce on the real key was not measured.
 * **Dirty RAM.** The unit's RAM is not cleared at power-up; every variable the loop reads is assigned in `run()` or by the engine before use, but this was only checked in MAME, where RAM starts at zero.
 * **The other machines.** Pitch, tempo and LCD spacing come from the CPU clock and the 4x20 DDRAM map of the gl4000 family. On a machine with a different clock the music is out of tune and, if the clock is faster, the LCD writes come closer than 41 us. None of the four other machines named on screen has been emulated or tested.
