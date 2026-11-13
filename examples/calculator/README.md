@@ -4,7 +4,7 @@ A cartridge (autostart `55 AA 59 45`) that turns the Genio into an algebraic sci
 
 ![MAME snapshots](screens_mame.png)
 
-**Machines.** It is written for the Spanish VTech Genio 2000 and will most likely also run on its relatives the Genius 4000, Genius LEADER 4000 Quadro, Genius LEADER 4004 Quadro L and PreComputer Power Pad, but it has only been run on the emulated Genio 2000 (see **Status**); their keyboards carry other legends, so the key names below and in the help are those of the Spanish unit. The activity-panel keys sit at the same matrix positions on those models only if their panels match.
+**Machines.** It is written for the Spanish VTech Genio 2000 and will most likely also run on its relatives the Genius 4000, Genius LEADER 4000 Quadro, Genius LEADER 4004 Quadro L and PreComputer Power Pad, but it has only been run on the Genio 2000 (see **Status**); their keyboards carry other legends, so the key names below and in the help are those of the Spanish unit. The activity-panel keys sit at the same matrix positions on those models only if their panels match.
 
 ## What it does
 * **Entry**: the formula as you would write it, on rows 1-2 (up to 120 characters, scrolling), the result right-aligned on row 3, the modes on row 0. Correct precedence (`2+3x4 = 14`, `-2^2 = -4`, `2^3^2 = 512`), implicit multiplication with priority (`1/2pi = 1/(2pi)`, `2A`, `3(4+5)`), postfix `x^2 x^3 x^-1 ! %`, missing `)` closed at the end. After a result an operator key continues from `Ans`; INTRO on an empty line repeats the last one; a history of the last lines (512 bytes). Syntax errors put the cursor where the problem is.

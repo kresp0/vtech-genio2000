@@ -2,6 +2,8 @@
 
 A text editor with the functions of the physical keyboard, a built-in keyboard diagnostic and export of the text to a PC (UTF-8 with CRC) through the DB25 printer port. Built for VGLDK's `gl4000` target with the profile `-DGENIO_ES -DGENIO_NATIVE_CGROM` (see `../vgldk-genio`). **It does not modify the internal firmware and it does not write any EEPROM.**
 
+![MAME snapshots](screens_mame.png)
+
 > **STATUS: tested on a real Genio 2000 by the author,** after being developed and tested on a PC and in the original project's Z80 simulator. The power-off sequence, the reading of OFF and the T642 serial transmission had already been validated on hardware in earlier ROMs. The checklist in [`docs/TESTING_ON_THE_UNIT.md`](docs/TESTING_ON_THE_UNIT.md) is the procedure for repeating the checks on a unit (results are not itemised here). A hardware test also confirmed that bit 5 of port 0x12 drives the caps-lock LED (`../../docs/firmware/HW_RESULTS_20261110.md`).
 
 The on-screen texts (help pages, menus) are in Spanish on purpose: they match the legends printed on the Spanish unit's keys.

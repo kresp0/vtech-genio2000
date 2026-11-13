@@ -2,6 +2,8 @@
 
 A 16 KiB cartridge (at 0x8000, autostart `55 AA 59 45`; it uses 15.6 KiB) and a Python script, `pclink.py`, that send data **from a PC to the Genio** through the printer port. The project's earlier tools only ever transmitted from the Genio (a software UART on DATA0); here the PC's USB-serial TXD drives the printer **BUSY** input, the cartridge decodes it as a UART (8N1) and answers on DATA0, so the PC can check every byte that arrived. It starts at **76800 baud**, the fastest stable rate.
 
+![MAME snapshots](screens_mame.png)
+
 | Rates | Status |
 |---|---|
 | **2400, 4800, 9600, 19200, 38400, 57600, 76800** (default 76800) | **stable**: every packet answered at the first try on the owner's unit in every run (2026-11-13) |

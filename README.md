@@ -18,13 +18,27 @@ Documentation, measurements and tools for the Spanish **VTech Genio 2000**, a 19
 Details, evidence levels and open questions are in [`docs/`](docs/README.md).
 
 ## MAME
-The driver is submitted to MAME as a series of small pull requests. The first one is open: [mamedev/mame#16800](https://github.com/mamedev/mame/pull/16800). The firmware and the reconstructed character table are not part of the pull requests; they were sent to the MAME team separately. Notes about the plan are in [`docs/mame/`](docs/mame/).
+The driver is submitted to MAME as a series of small pull requests. The first one is open: [mamedev/mame#16800](https://github.com/mamedev/mame/pull/16800). The firmware and the reconstructed character table are not part of the pull requests; they were sent to the MAME team separately (the character table is also in [`cgrom/`](cgrom/README.md)). Notes about the plan are in [`docs/mame/`](docs/mame/).
+
+The photographic layout (later in the series, [`docs/mame/ARTWORK.md`](docs/mame/ARTWORK.md)) shows the emulated LCD inside photographs of the unit, with clickable keys. Here it runs the [EBASIC](https://github.com/kresp0/ebasic) cartridge:
+
+![MAME with the photographic layout, at the EBASIC start screen](docs/mame/layout_ebasic.jpg)
+
+## Character set (CGROM)
+The LCD controller has its own character table, with Spanish letters, accents, mathematical symbols and Greek letters. It was rebuilt from photographs of the real LCD showing every code from 0x20 to 0xFF, three screens at a time:
+
+![Codes 0x20-0x6F](cgrom/photo_page1.jpg)
+![Codes 0x70-0xBF](cgrom/photo_page2.jpg)
+![Codes 0xC0-0xFF](cgrom/photo_page3.jpg)
+
+The result, [`cgrom/genio2000_cgrom_reconstructed.bin`](cgrom/genio2000_cgrom_reconstructed.bin) (4096 bytes, MAME `hd44780` format, SHA-1 `0ad6de16db67c014f44211dfd1328091be389cc7`), is what MAME's `genio2000` driver loads. It is not a read of the chip, so MAME marks it `BAD_DUMP`. How it was made, its limits and MAME's rendering of the same screens: [`cgrom/README.md`](cgrom/README.md) and [`docs/hardware/CGROM.md`](docs/hardware/CGROM.md).
 
 ## Repository layout
 * [`docs/`](docs/README.md): hardware notes, firmware analysis, MAME notes.
 * [`tools/`](tools/README.md): hardware test cartridge, analysis tools, MAME helpers. The ROM dumper is in its own repository, [vtech-genio2000-rom-dumper](https://github.com/kresp0/vtech-genio2000-rom-dumper).
 * [`examples/`](examples/README.md): cartridge programs (a text editor, a PC serial link, a diagnostic cartridge, a scientific calculator, demos) and the VGLDK layer they build on.
 * [`docs/DEVELOPING.md`](docs/DEVELOPING.md): how to write, build, test and burn your own cartridge.
+* [`cgrom/`](cgrom/README.md): the LCD's character table, rebuilt from photographs, for MAME.
 * [`photos/`](photos/README.md): the unit, its board and a memory cartridge.
 * [`release/`](release/RELEASE_NOTES.md): ready-to-burn cartridge images (examples and the hardware test) with SHA-256 sums.
 * [`AGENTS.md`](AGENTS.md): short rules for AI agents working here.
@@ -33,4 +47,4 @@ The driver is submitted to MAME as a series of small pull requests. The first on
 The ROM, any dump of it and anything derived from it (disassembly listings, decoded data banks) are not published: see [`NOTICE.md`](NOTICE.md). You can check a dump of your own unit against the CRC-32 and hashes in the documents.
 
 ## Credits and licence
-Code: BSD-3-Clause (the programs in `examples/` and the images in `release/` are GPL-3.0-or-later because they are built against VGLDK). Documentation and photographs: CC BY 4.0. See [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md), which also describes the AI assistance used for the analysis tools and the text. The hardware work and all measurements are by Santiago Crespo.
+Code: BSD-3-Clause (the programs in `examples/` and the images in `release/` are GPL-3.0-or-later because they are built against VGLDK). Documentation, photographs and the character table: CC BY 4.0. See [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md), which also describes the AI assistance used for the analysis tools and the text. The hardware work and all measurements are by Santiago Crespo.

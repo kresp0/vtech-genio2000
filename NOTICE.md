@@ -3,13 +3,13 @@
 ## Licences
 * **Code and tools** (everything under `tools/` that is the author's own work): BSD 3-Clause, see `LICENSE`.
 * **Examples** (`examples/`): GPL-3.0-or-later, because they are built against VGLDK (GPL-3.0), which is not included; see `examples/README.md`.
-* **Documentation** (`docs/`) and **photographs** (`photos/`): Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/ . Copyright (c) 2026 Santiago Crespo. The photographs are the author's own.
+* **Documentation** (`docs/`), **photographs** (`photos/`) and the **reconstructed character table** of the LCD with its photographs (`cgrom/`): Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/ . Copyright (c) 2026 Santiago Crespo. The photographs are the author's own.
+* The glyph designs of the character table are those of the LCD controller's maker; the file is a reconstruction from photographs of the unit's display, not a read of the chip.
 * The VTech name, logos, product design and printed artwork that appear in the photographs and in the documents belong to their owners and are **not** covered by these licences.
 
 ## Not included on purpose
 * **The firmware (ROM) of the Genio 2000** and any dump of it. It is VTech's work. The documents give its size, CRC-32 and SHA-1/SHA-256 so that anyone can check a dump of their own unit, and the `tools/dumper/` tools show how to read it from a unit you own.
 * Material derived from the firmware: disassembly listings, string and function tables, decoded question/word banks, RAM dumps.
-* The reconstructed character-generator table of the LCD (it is derived by photographing the unit's display; it is distributed through the MAME submission instead).
 * Third-party code: the VGLDK development kit used to build the cartridge images, SDCC, and any other external project. The ROM dumper is in its own repository, https://github.com/kresp0/vtech-genio2000-rom-dumper .
 * Build outputs and raw serial captures. The cartridge images of the examples and of the hardware test are published in `release/` (they contain none of the firmware).
 * Videos of the unit.

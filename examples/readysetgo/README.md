@@ -2,6 +2,8 @@
 
 A 16 KiB cartridge (at 0x8000, autostart `55 AA 59 45`; it uses 15,379 bytes) that starts like the machine's BASIC: a `READY` prompt with a blinking cursor, where somebody types `run`. Then giant letters spell **READY**, the fleet charges up behind a giant **SET**, the demo waits for you to press a key, and a giant **GO!** launches three ships out of a mothership and into hyperspace, while the names of the 4x20 machines it is written for scroll along the bottom row. It ends with the credits and the `READY` prompt again. 1-bit music and the caps-lock LED follow everything. Only documented Z80 opcodes are used.
 
+![MAME snapshots](screens_mame.png)
+
 ## The show (about 64 s plus the waits)
 | Segment | Length | Screen | Sound / LED |
 |---|---|---|---|
@@ -40,7 +42,7 @@ Needs `sdcc` 4.5, `makebin`, `python3` and an **unmodified** VGLDK at commit 6fb
 
 ## Tests in MAME (`mame/`)
 * `run_test.sh <dir> <seconds> <scenario>` (after `make`; set `MAME` to the binary with the genio2000 driver and `ROMPATH` to your own ROMs, `docs/DEVELOPING.md` section 4) runs MAME headless (no display, no window; `-video none`, SDL dummy drivers, its own cfg/nvram folders) with `rsg_test.lua`, which presses keys, takes snapshots, logs where each segment ends, and watches every write to ports 0x0A/0x0B/0x12.
-* `check_run.py` replays the event streams and the marquee of `scenes.h` from their bytes alone, with the engine's frame lengths, renders the LCD it predicts, and compares it dot by dot with each snapshot. The replay counts iterations but not the T-states `fetch_note` spends between notes (0.2-0.8 % in the busy sections), so it searches up to 1 % of the elapsed time back, allows the marquee one step either way, and prints what it used (at most 18 ms and one step). `check_snaps.py` does the same for single snapshots. Both draw the ROM characters from your own reconstructed CGROM: set `GENIO_CGROM` to `genio2000_cgrom_reconstructed.bin` (it is not in this repository).
+* `check_run.py` replays the event streams and the marquee of `scenes.h` from their bytes alone, with the engine's frame lengths, renders the LCD it predicts, and compares it dot by dot with each snapshot. The replay counts iterations but not the T-states `fetch_note` spends between notes (0.2-0.8 % in the busy sections), so it searches up to 1 % of the elapsed time back, allows the marquee one step either way, and prints what it used (at most 18 ms and one step). `check_snaps.py` does the same for single snapshots. Both draw the ROM characters from your own reconstructed CGROM: set `GENIO_CGROM` to [`../../cgrom/genio2000_cgrom_reconstructed.bin`](../../cgrom/).
 * Example: `MAME=... ROMPATH=... mame/run_test.sh runA 80 "15:press:ESPACIO;20:snap;30:snap;31:quit" -snapview native && GENIO_CGROM=... python3 mame/check_run.py runA basic,ready,set,prompt,go,launch,warp`. Add `-sound sdl -wavwrite out.wav` (with the SDL dummy audio driver the script sets) to record the audio.
 
 ## Status

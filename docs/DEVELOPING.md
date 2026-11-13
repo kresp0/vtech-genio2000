@@ -8,7 +8,7 @@ How to write, build, test and burn a cartridge program for the Spanish VTech Gen
 |---|---|
 | Toolchain | [SDCC](https://sdcc.sourceforge.net/) 4.5 (`sdcc`, `sdasz80`, `makebin`), Python 3 |
 | C library layer | [VGLDK](https://github.com/hotkeymuc/vgldk) commit `6fbd389ace4c7bf156cb2c3fafafb1acf4a2a857` (GPL-3.0, not included), plus [`examples/vgldk-genio`](../examples/vgldk-genio/README.md) for the Spanish keyboard and the native character set |
-| Emulator | MAME with the `genio2000` driver (section 4) and **your own** ROM dump: the firmware and the reconstructed character table are not in this repository |
+| Emulator | MAME with the `genio2000` driver (section 4) and **your own** ROM dump (the firmware is not in this repository); the reconstructed character table is in [`cgrom/`](../cgrom/README.md) |
 | Hardware (optional) | a Genio 2000, an AT28C256 EEPROM in a modified cartridge, a programmer, a USB-serial adapter for output and input. The cartridge modification is described in [vtech-genio2000-rom-dumper](https://github.com/kresp0/vtech-genio2000-rom-dumper) |
 
 ## 2. The machine in one page
@@ -61,7 +61,7 @@ Until the driver is merged into MAME, use the `genio2000-complete` branch of the
 ```bash
 git clone https://github.com/kresp0/mame && cd mame && git switch genio2000-complete
 make SUBTARGET=genio SOURCES=src/mame/vtech/pc2000.cpp REGENIE=1 -j"$(nproc)"     # a plain `make` builds all of MAME
-mkdir -p roms/genio2000      # put your own 27-5575-00 and genio2000_cgrom_reconstructed.bin here (or in genio2000.zip)
+mkdir -p roms/genio2000      # put your own 27-5575-00 and cgrom/genio2000_cgrom_reconstructed.bin here (or in genio2000.zip)
 ./genio genio2000 -rompath roms -cart kepler_gl2000_mirrored_AT28C256_32K.bin
 ```
 MAME models the clock (6.13179 MHz), the 46.76 Hz interrupt, the Spanish keyboard, the LCD, the 1-bit speaker and the cartridge slot, and it has a built-in photographic layout in `genio2000-complete`. For automated tests run it headless, `-video none -sound none -seconds_to_run N -snapshot_directory DIR`, and compare snapshots or Lua-script output (`tools/mame-tests/`, `tools/analysis/run_cart.sh`). Without a display, `unset DISPLAY` and set `SDL_VIDEODRIVER=dummy`.

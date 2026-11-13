@@ -2,7 +2,9 @@
 
 A 16 KiB cartridge (at 0x8000, autostart `55 AA 59 45`; it uses 14.3 KiB) that tests the whole machine from a menu: the CPU, the 8 KiB of RAM, the cartridge and internal ROM, the periodic interrupt, the ports, the LCD, the keyboard, the speaker and the caps-lock LED. Automatic tests decide OK / FAIL by themselves; interactive ones show something and ask you: INTRO = yes, N = no, REPETIR (REPETIR / BORRAR) = run the test again. Every result is kept in a result list with a one-line detail.
 
-The user interface is in English; keys are called by the Spanish legends printed on them (INTRO, RESPUESTA, AVANCE, RETROCESO, REPETIR...). It should also run on the Genius 4000, Genius LEADER 4000 Quadro, Genius LEADER 4004 Quadro L and PreComputer Power Pad, but it has only been run on the emulated Genio 2000 (see **Status**).
+![MAME snapshots](screens_mame.png)
+
+The user interface is in English; keys are called by the Spanish legends printed on them (INTRO, RESPUESTA, AVANCE, RETROCESO, REPETIR...). It should also run on the Genius 4000, Genius LEADER 4000 Quadro, Genius LEADER 4004 Quadro L and PreComputer Power Pad, but it has only been run on the Genio 2000 (see **Status**).
 
 ## Menu
 The title screen waits for a key; then:

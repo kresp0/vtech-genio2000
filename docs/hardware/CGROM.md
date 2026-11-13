@@ -4,7 +4,7 @@
 * File: `genio2000_cgrom_reconstructed.bin`, 4096 bytes = 256 entries x 16 bytes, **MAME `hd44780` format** (bit 4 = leftmost pixel, rows 0-7 in bytes 0-7, bytes 8-15 zero because 5x10 mode was never observed, codes 0x00-0x1F zero).
 * **Version used: "final reviewed" of 2026-11-09 01:30** – CRC32 `1F712C25`, SHA-1 `0AD6DE16DB67C014F44211DFD1328091BE389CC7`, SHA-256 `7E4FF917DFFD…745534`. Source: `dev/mame-cgrom/preservation/rom_archive/20261109_final/` (output of the manual review editor, `corrections_20261109_final.json`).
   Earlier version an earlier reconstruction (SHA-1 `EF026A8B…`, 1101 inferred + 192 unknown pixels) differs in 32 bytes and is **superseded**; the older `LIMITATIONS.md` numbers refer to it.
-  A copy of the used file and its hashes are in `data/cgrom/`.
+  The file, its hashes and the photographs it was rebuilt from are in [`../../cgrom/`](../../cgrom/README.md).
 * Provenance: optical reconstruction from 4 photographs of the LCD of the real unit running the project's CGROM viewer (identities confirmed by the owner, 194 hardware events); in the final version all 8960 pixels are flagged *verified* after manual review (1305 pixels in 199 glyphs were hand-set, each with a log entry). It is **not a read of the silicon**, so the ROM entry stays **`BAD_DUMP`** (MAME then reports "NEEDS REDUMP"). Full evidence: `dev/mame-cgrom/EVIDENCE.md`, `preservation/PROVENANCE.md`, `editor/output/r_20261109_013018/` (uncertainty, correction log, per-glyph notes).
 
 ## Integration (smallest change)

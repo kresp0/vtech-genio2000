@@ -2,6 +2,8 @@
 
 A 16 KiB cartridge (at 0x8000, autostart `55 AA 59 45`; it uses about 15.9 KiB). It plays the Kepler 2000 music (about 45 s) **while** animating the LCD (CGRAM, ROM characters and the caps-lock LED), with interrupts disabled and 100 % of the T-states spread over a few loops of 256 T-states per iteration. At the end it switches the unit off.
 
+![MAME snapshots](screens_mame.png)
+
 ## What the loops do (256 T-states = 41.7 us per iteration; `gen_demo.py` generates them with the exact count)
 * **Audio**: 2 samples per iteration (16-bit phase accumulator -> square wave on bit 3 of port 0x12), fs about 47.9 kHz. Measured in MAME: every sample comes out exactly 128 T-states after the previous one.
 * **CGRAM scenes** (warp, waves, KEPLER, jump): 1 write to the LCD per iteration (>= 37 us between writes, as the HD44780 requires). Each frame (71 iterations, 2.96 ms, about 337 frames/s) rewrites the 64 bytes of CGRAM (8 characters). The 4 x 20 screen is 80 cells that use only those 8 characters (`(col + 2*row) & 7`), so the picture is a periodic ring of 40 x 8 pixels; the loop computes in real time 8 pixel strips with fractional (8.8) shifting, a sine ripple per row and tables of 5-pixel windows. Each frame updates one row (5 iterations of computation).
