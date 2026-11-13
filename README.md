@@ -43,8 +43,5 @@ The result, [`cgrom/genio2000_cgrom_reconstructed.bin`](cgrom/genio2000_cgrom_re
 * [`release/`](release/RELEASE_NOTES.md): ready-to-burn cartridge images (examples and the hardware test) with SHA-256 sums.
 * [`AGENTS.md`](AGENTS.md): short rules for AI agents working here.
 
-## What is not here
-The ROM, any dump of it and anything derived from it (disassembly listings, decoded data banks) are not published: see [`NOTICE.md`](NOTICE.md). You can check a dump of your own unit against the CRC-32 and hashes in the documents.
-
 ## Credits and licence
 Code: BSD-3-Clause (the programs in `examples/` and the images in `release/` are GPL-3.0-or-later because they are built against VGLDK). Documentation, photographs and the character table: CC BY 4.0. See [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md), which also describes the AI assistance used for the analysis tools and the text. The hardware work and all measurements are by Santiago Crespo.
