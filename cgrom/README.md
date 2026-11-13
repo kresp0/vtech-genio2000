@@ -43,4 +43,4 @@ More detail, including which glyphs use the eighth pixel row and the differences
 * What would close the gaps: straight-on photos of the low-confidence codes, at two exposures, a repeat on another day, or a second unit.
 
 ## Licence
-The binary, the photographs and this document: CC BY 4.0, copyright (c) 2026 Santiago Crespo. The glyph designs are those of the LCD controller's maker; the VTech name and printed artwork in the photographs belong to their owners. See [`../NOTICE.md`](../NOTICE.md).
+The binary, the photographs and this document: CC0 1.0 (public domain, `../LICENSE-CC0`), by Santiago Crespo. The glyph designs are those of the LCD controller's maker; the VTech name and printed artwork in the photographs belong to their owners. See [`../NOTICE.md`](../NOTICE.md).

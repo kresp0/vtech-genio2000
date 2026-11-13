@@ -1,9 +1,10 @@
 # Licensing and what is not in this repository
 
 ## Licences
-* **Code and tools** (everything under `tools/` that is the author's own work): BSD 3-Clause, see `LICENSE`.
-* **Examples** (`examples/`): GPL-3.0-or-later, because they are built against VGLDK (GPL-3.0), which is not included; see `examples/README.md`.
-* **Documentation** (`docs/`), **photographs** (`photos/`) and the **reconstructed character table** of the LCD with its photographs (`cgrom/`): Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/ . Copyright (c) 2026 Santiago Crespo. The photographs are the author's own.
+* **Code and tools** (everything under `tools/` and the other code outside `examples/` that is the author's own work): **0BSD**, see `LICENSE`: use, copy, modify and distribute it for any purpose, with or without fee, without conditions. The `hwtest` images in `release/` are an exception: they are built against VGLDK (see the next item).
+* **Examples** (`examples/`) and the images in `release/`: GPL-3.0-or-later, because they are built against VGLDK (GPL-3.0), which is not included; see `examples/README.md`.
+* **Documentation** (`docs/` and the README files), **photographs** (`photos/`) and the **reconstructed character table** of the LCD with its photographs (`cgrom/`): dedicated to the public domain under **CC0 1.0 Universal**, see `LICENSE-CC0` (https://creativecommons.org/publicdomain/zero/1.0/). No attribution is required; a link back is welcome. The photographs are the author's own.
+* Until 2026-11-13 the code outside `examples/` was released under BSD-3-Clause and the documentation, photographs and character table under CC BY 4.0; copies taken then may still be used under those terms.
 * The glyph designs of the character table are those of the LCD controller's maker; the file is a reconstruction from photographs of the unit's display, not a read of the chip.
 * The VTech name, logos, product design and printed artwork that appear in the photographs and in the documents belong to their owners and are **not** covered by these licences.
 

@@ -44,4 +44,4 @@ The result, [`cgrom/genio2000_cgrom_reconstructed.bin`](cgrom/genio2000_cgrom_re
 * [`AGENTS.md`](AGENTS.md): short rules for AI agents working here.
 
 ## Credits and licence
-Code: BSD-3-Clause (the programs in `examples/` and the images in `release/` are GPL-3.0-or-later because they are built against VGLDK). Documentation, photographs and the character table: CC BY 4.0. See [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md), which also describes the AI assistance used for the analysis tools and the text. The hardware work and all measurements are by Santiago Crespo.
+Code: 0BSD (the programs in `examples/` and the images in `release/` are GPL-3.0-or-later because they are built against VGLDK). Documentation, photographs and the character table: CC0 1.0 (public domain). See [`LICENSE`](LICENSE), [`LICENSE-CC0`](LICENSE-CC0) and [`NOTICE.md`](NOTICE.md), which also describes the AI assistance used for the analysis tools and the text. The hardware work and all measurements are by Santiago Crespo.
