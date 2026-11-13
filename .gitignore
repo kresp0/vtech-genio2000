@@ -1,6 +1,7 @@
 # never commit firmware or material derived from it
 *.bin
 !release/*.bin
+!cgrom/genio2000_cgrom_reconstructed.bin
 *.rom
 *.ihx
 *.rel
