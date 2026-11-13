@@ -1,0 +1,5 @@
+out/
+mame/
+__pycache__/
+serial.h
+scope_*.txt
